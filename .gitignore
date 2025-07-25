@@ -1,0 +1,6 @@
+*
+!.gitignore
+!**/*.ipynb
+!**/*.yml
+!**/*.yaml
+!requirements.txt
