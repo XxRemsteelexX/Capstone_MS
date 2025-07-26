@@ -1,6 +1,43 @@
-*
-!.gitignore
-!**/*.ipynb
-!**/*.yml
-!**/*.yaml
-!requirements.txt
+# Ignore data and large files
+*.csv
+*.zip
+*.tar.gz
+*.h5
+*.pt
+*.pth
+*.npz
+*.npy
+*.jpg
+*.jpeg
+*.png
+
+# Ignore dataset folders
+data/
+datasets/
+__pycache__/
+checkpoints/
+outputs/
+logs/
+*.ipynb_checkpoints
+
+# Ignore environment and system files
+.env
+.DS_Store
+.vscode/
+
+# Ignore large folders / model data
+burn_dataset/
+saved_models/
+symptom_classifier_model/
+pytorch_model_outputs/
+results/
+Unused models/
+*.keras
+*.h5
+*.pt
+*.ckpt
+
+# Avoid auto-save or junk
+*.pyc
+__pycache__/
+*.DS_Store
