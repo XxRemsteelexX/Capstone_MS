@@ -118,8 +118,8 @@
   <main>
     <p style="font-weight: 600; color: #2b6cb0;">We need a little more information to help you accurately.</p>
     <form method="post">
-      <label for="details"><strong>Please describe how long you've had these symptoms and anything else important:</strong></label>
-      <textarea name="details" id="details" placeholder="e.g., symptoms started 3 days ago, getting worse, any medications you're taking, previous medical conditions..." required></textarea>
+      <label for="more_info"><strong>Please describe how long you've had these symptoms and anything else important:</strong></label>
+      <textarea name="more_info" id="more_info" placeholder="e.g., symptoms started 3 days ago, getting worse, any medications you're taking, previous medical conditions..." required></textarea>
       <button type="submit">Continue</button>
     </form>
     
@@ -140,6 +140,7 @@
   </main>
 
   <footer>
+    <p>&copy; 2025 Apollo Healthcare Connect. All rights reserved.</p>
     <a href="{{ url_for('index') }}">Home</a> |
     <a href="{{ url_for('triage') }}">Triage</a> |
     <a href="{{ url_for('upload') }}">Upload Image</a> |

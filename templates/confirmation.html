@@ -71,21 +71,56 @@
       margin: 0.5rem 0;
       font-size: 1.1rem;
     }
-    .report-link {
-      background-color: #2b6cb0;
+    .medical-handoff-section {
+      background: linear-gradient(135deg, #fee2e2, #fecaca);
+      border: 2px solid #dc2626;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+    .handoff-notice h3 {
+      color: #dc2626;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.3rem;
+    }
+    .handoff-notice p {
+      color: #7f1d1d;
+      margin: 0 0 1.5rem 0;
+      font-weight: 500;
+    }
+    .medical-report-button {
+      display: inline-block;
+      background: #dc2626;
       color: white;
       padding: 1rem 2rem;
-      font-size: 1.1rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
       text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    }
+    .medical-report-button:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.4);
+      color: white;
+      text-decoration: none;
+    }
+    .new-assessment-button {
       display: inline-block;
-      margin: 1rem;
+      background: #2b6cb0;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      margin: 1rem 0.5rem;
       transition: background-color 0.3s ease;
     }
-    .report-link:hover {
-      background-color: #205080;
+    .new-assessment-button:hover {
+      background: #205080;
       color: white;
       text-decoration: none;
     }
@@ -154,8 +189,8 @@
 
     <div class="appointment-details">
       <h3>Appointment Details</h3>
-      <p><strong>Patient:</strong> {{ patient_name }}</p>
-      <p><strong>Date & Time:</strong> {{ appointment_time }}</p>
+      <p><strong>Patient:</strong> {{ session.patient_name }}</p>
+      <p><strong>Date & Time:</strong> {{ session.appointment_time }}</p>
       <p><strong>Location:</strong> {{ clinic.name }}</p>
       <p><strong>Address:</strong> {{ clinic.address }}</p>
       <p><strong>Phone:</strong> {{ clinic.phone }}</p>
@@ -171,11 +206,17 @@
       </ul>
     </div>
 
-    <div style="text-align: center; margin: 2rem 0;">
-      <a href="{{ url_for('report') }}" class="report-link">View Full Medical Report</a>
-      <p style="margin: 1rem 0;">
-        <a href="{{ url_for('index') }}" style="color: #2b6cb0;">Start New Assessment</a>
-      </p>
+    <div class="medical-handoff-section">
+      <div class="handoff-notice">
+        <h3>📋 Medical Information Handoff</h3>
+        <p>Your assessment and appointment details have been compiled for the healthcare provider.</p>
+      </div>
+      <a href="{{ url_for('report') }}" class="medical-report-button">
+        📄 See Information Sent to Healthcare Provider
+      </a>
+      <div style="margin-top: 1.5rem;">
+        <a href="{{ url_for('index') }}" class="new-assessment-button">Start New Assessment</a>
+      </div>
     </div>
 
     <section class="features">
@@ -195,6 +236,7 @@
   </main>
 
   <footer>
+    <p>&copy; 2025 Apollo Healthcare Connect. All rights reserved.</p>
     <a href="{{ url_for('index') }}">Home</a> |
     <a href="{{ url_for('triage') }}">Triage</a> |
     <a href="{{ url_for('upload') }}">Upload Image</a> |

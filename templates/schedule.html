@@ -169,8 +169,8 @@
       <label for="appointment_time"><strong>Select a preferred appointment time:</strong></label>
       <select name="appointment_time" id="appointment_time" required>
         <option value="">-- Select an appointment time --</option>
-        {% for appointment in appointments %}
-        <option value="{{ appointment.time }}">{{ appointment.display }}</option>
+        {% for time in available_times %}
+        <option value="{{ time }}">{{ time }}</option>
         {% endfor %}
       </select>
 
@@ -194,6 +194,7 @@
   </main>
 
   <footer>
+    <p>&copy; 2025 Apollo Healthcare Connect. All rights reserved.</p>
     <a href="{{ url_for('index') }}">Home</a> |
     <a href="{{ url_for('triage') }}">Triage</a> |
     <a href="{{ url_for('upload') }}">Upload Image</a> |

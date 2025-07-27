@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apollo Healthcare Connect</title>
+  <title>Contact - Apollo Healthcare Connect</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700&display=swap" rel="stylesheet">
   <style>
@@ -43,32 +43,6 @@
       font-weight: 800;
       letter-spacing: 1px;
     }
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-    textarea {
-      padding: 1rem;
-      border: 1px solid #bcccdc;
-      border-radius: 8px;
-      font-size: 1rem;
-      min-height: 120px;
-      margin-bottom: 1.5rem;
-      resize: vertical;
-    }
-    button {
-      padding: 0.75rem 1.25rem;
-      font-size: 1rem;
-      color: white;
-      background-color: #2b6cb0;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #205080;
-    }
     .features {
       display: flex;
       flex-wrap: wrap;
@@ -97,6 +71,11 @@
       font-size: 1rem;
       margin-top: 2rem;
     }
+    footer a {
+      color: #2b6cb0;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
     @media (max-width: 800px) {
       .features {
         flex-direction: column;
@@ -111,14 +90,14 @@
     <p class="tagline">Your well-being is our priority</p>
   </header>
   <main>
-
-      <h2 style="color: #2b6cb0;">Contact Us</h2>
-      <p>If you have questions, please reach out at:</p>
-      <ul>
-        <li>Email: support@apollohealthcare.ai</li>
-        <li>Phone: (800) 555-0123</li>
-        <li>Address: 123 Apollo Ave, Health City, HC 12345</li>
-      </ul>
+    <h2 style="color: #2b6cb0;">Contact Us</h2>
+    <p>If you have questions, please reach out at:</p>
+    <ul>
+      <li>Email: support@apollohealthcare.ai</li>
+      <li>Phone: (800) 555-0123</li>
+      <li>Address: 123 Apollo Ave, Health City, HC 12345</li>
+    </ul>
+    
     <section class="features">
       <div class="feature">
         <h3>Fast &amp; Reliable</h3>
@@ -133,16 +112,16 @@
         <p>We are here to help you feel better.</p>
       </div>
     </section>
-</main>
+  </main>
 
-    <footer class="footer-nav">
-      <a href="index.html">Home</a> |
-      <a href="triage.html">Triage</a> |
-      <a href="upload.html">Upload Image</a> |
-      <a href="schedule.html">Next Steps</a> |
-      <a href="about.html">About</a> |
-      <a href="contact.html">Contact</a>
-    </footer>
-
+  <footer>
+    <p>&copy; 2025 Apollo Healthcare Connect. All rights reserved.</p>
+    <a href="{{ url_for('index') }}">Home</a> |
+    <a href="{{ url_for('triage') }}">Triage</a> |
+    <a href="{{ url_for('upload') }}">Upload Image</a> |
+    <a href="{{ url_for('schedule') }}">Schedule</a> |
+    <a href="{{ url_for('about') }}">About</a> |
+    <a href="{{ url_for('contact') }}">Contact</a>
+  </footer>
 </body>
 </html>
