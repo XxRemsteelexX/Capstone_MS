@@ -4,9 +4,12 @@ torchvision==0.21.0
 transformers==4.44.0
 Pillow==10.4.0
 opencv-python-headless==4.10.0.84
-numpy==2.1.0
+numpy==2.3.2
+pandas==2.3.1
 scikit-learn==1.5.0
-pandas==2.2.0
 requests==2.31.0
 gunicorn==21.2.0
 Werkzeug==3.0.0
+boto3==1.35.0
+albumentations==1.4.0
+timm==1.0.0
