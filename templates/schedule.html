@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apollo Healthcare Connect</title>
+  <title>Schedule Appointment - Apollo Healthcare Connect</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700&display=swap" rel="stylesheet">
   <style>
@@ -47,7 +47,7 @@
       display: flex;
       flex-direction: column;
     }
-    textarea, input, select {
+    input, select {
       padding: 1rem;
       border: 1px solid #bcccdc;
       border-radius: 8px;
@@ -96,6 +96,34 @@
       font-size: 1rem;
       margin-top: 2rem;
     }
+    footer a {
+      color: #2b6cb0;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+    .clinic-info {
+      background-color: #f0f9ff;
+      border: 1px solid #2b6cb0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .error {
+      background-color: #fee2e2;
+      border: 1px solid #dc2626;
+      color: #dc2626;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    .next-day-notice {
+      background-color: #fef3c7;
+      border: 1px solid #f59e0b;
+      color: #92400e;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
     @media (max-width: 800px) {
       .features {
         flex-direction: column;
@@ -110,26 +138,45 @@
     <p class="tagline">Your well-being is our priority</p>
   </header>
   <main>
+    <div class="clinic-info">
+      <h3 style="color: #2b6cb0; margin-top: 0;">Apollo Urgent Care Center</h3>
+      <p><strong>Address:</strong> 789 Healthcare Blvd, Waterloo, IA 50701</p>
+      <p><strong>Phone:</strong> (319) 555-CARE (2273)</p>
+      <p><strong>Hours:</strong> 8:00 AM - 8:00 PM, 7 days a week</p>
+    </div>
 
-      <p style="font-weight: 600; color: #2b6cb0;">Based on the information provided, we recommend scheduling an appointment.</p>
-      <form method="post" action="/report">
-        <label for="name"><strong>Patient Name:</strong></label>
-        <input type="text" name="name" id="name" required />
+    {% if is_next_day %}
+    <div class="next-day-notice">
+      <strong>Notice:</strong> Our clinic is currently closed. Available appointments are for tomorrow.
+    </div>
+    {% endif %}
 
-        <label for="reason"><strong>Reason for Visit / Symptoms:</strong></label>
-        <textarea name="reason" id="reason" required></textarea>
+    {% if error %}
+    <div class="error">
+      {{ error }}
+    </div>
+    {% endif %}
 
-        <label for="recommendation"><strong>Recommendation:</strong></label>
-        <select name="recommendation" id="recommendation" required>
-          <option value="Urgent Care">Urgent Care</option>
-          <option value="Emergency Room">Emergency Room</option>
-        </select>
+    <p style="font-weight: 600; color: #2b6cb0;">Based on the information provided, we recommend scheduling an appointment.</p>
+    
+    <form method="post">
+      <label for="name"><strong>Patient Name:</strong></label>
+      <input type="text" name="name" id="name" required />
 
-        <label for="time"><strong>Select a preferred appointment time:</strong></label>
-        <input type="datetime-local" name="appointment_time" id="time" required />
+      <label for="phone"><strong>Phone Number:</strong></label>
+      <input type="tel" name="phone" id="phone" placeholder="(319) 555-0123" required />
 
-        <button type="submit">Submit & Generate Report</button>
-      </form>
+      <label for="appointment_time"><strong>Select a preferred appointment time:</strong></label>
+      <select name="appointment_time" id="appointment_time" required>
+        <option value="">-- Select an appointment time --</option>
+        {% for appointment in appointments %}
+        <option value="{{ appointment.time }}">{{ appointment.display }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Book Appointment</button>
+    </form>
+
     <section class="features">
       <div class="feature">
         <h3>Fast &amp; Reliable</h3>
@@ -144,16 +191,15 @@
         <p>We are here to help you feel better.</p>
       </div>
     </section>
-</main>
+  </main>
 
-    <footer class="footer-nav">
-      <a href="index.html">Home</a> |
-      <a href="triage.html">Triage</a> |
-      <a href="upload.html">Upload Image</a> |
-      <a href="schedule.html">Next Steps</a> |
-      <a href="about.html">About</a> |
-      <a href="contact.html">Contact</a>
-    </footer>
-
+  <footer>
+    <a href="{{ url_for('index') }}">Home</a> |
+    <a href="{{ url_for('triage') }}">Triage</a> |
+    <a href="{{ url_for('upload') }}">Upload Image</a> |
+    <a href="{{ url_for('schedule') }}">Schedule</a> |
+    <a href="{{ url_for('about') }}">About</a> |
+    <a href="{{ url_for('contact') }}">Contact</a>
+  </footer>
 </body>
 </html>

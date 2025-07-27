@@ -1,4 +1,4 @@
-name: base
+name: capstone.env
 channels:
   - defaults
 dependencies:

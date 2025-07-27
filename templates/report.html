@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Diagnostic Report</title>
+  <title>Medical Assessment Report - Apollo Healthcare Connect</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -13,6 +12,7 @@
       color: #2d3748;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
     }
     header {
       background-color: #2b6cb0;
@@ -21,7 +21,7 @@
       text-align: center;
     }
     main {
-      max-width: 800px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 2rem;
       background-color: white;
@@ -30,30 +30,91 @@
     }
     h1 {
       margin-top: 0;
+      color: #2b6cb0;
+      border-bottom: 2px solid #2b6cb0;
+      padding-bottom: 0.5rem;
     }
     .report-section {
       margin-bottom: 2rem;
-    
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background-color: #f9fafb;
     }
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 2rem 0 0 0;
-      gap: 2rem;
-    }
-    .feature {
-      background: #f5f5f5;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      padding: 2rem;
-      max-width: 320px;
-      flex: 1 1 250px;
-      text-align: center;
-    }
-    .feature h3 {
+    .report-section h3 {
       margin-top: 0;
       color: #2b6cb0;
+      border-bottom: 1px solid #2b6cb0;
+      padding-bottom: 0.25rem;
+    }
+    .patient-info {
+      background-color: #f0f9ff;
+      border-left: 4px solid #2b6cb0;
+    }
+    .assessment-results {
+      background-color: #f0fdf4;
+      border-left: 4px solid #16a34a;
+    }
+    .symptoms-info {
+      background-color: #fefce8;
+      border-left: 4px solid #ca8a04;
+    }
+    .data-row {
+      display: flex;
+      margin: 0.5rem 0;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .data-row:last-child {
+      border-bottom: none;
+    }
+    .data-label {
+      font-weight: bold;
+      min-width: 150px;
+      color: #374151;
+    }
+    .data-value {
+      flex: 1;
+      color: #1f2937;
+    }
+    .prediction-box {
+      background-color: #e0f2fe;
+      border: 2px solid #0891b2;
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    .prediction-box.emergency {
+      background-color: #fef2f2;
+      border-color: #dc2626;
+    }
+    .confidence-bar {
+      background-color: #e5e7eb;
+      border-radius: 4px;
+      height: 20px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .confidence-fill {
+      height: 100%;
+      background-color: #2b6cb0;
+      transition: width 0.3s ease;
+    }
+    .confidence-fill.low {
+      background-color: #dc2626;
+    }
+    .confidence-fill.medium {
+      background-color: #f59e0b;
+    }
+    .confidence-fill.high {
+      background-color: #16a34a;
+    }
+    .timestamp {
+      font-size: 0.9rem;
+      color: #6b7280;
+      font-style: italic;
+      text-align: right;
+      margin-bottom: 1rem;
     }
     footer {
       text-align: center;
@@ -61,38 +122,211 @@
       background: #e2e8f0;
       color: #4a5568;
       font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+    footer a {
+      color: #2b6cb0;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+    .print-button {
+      background-color: #2b6cb0;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin: 1rem 0;
+      transition: background-color 0.3s ease;
+    }
+    .print-button:hover {
+      background-color: #205080;
+    }
+    @media print {
+      body { background: white; }
+      header, footer, .print-button { display: none; }
+      main { box-shadow: none; margin: 0; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Apollo Healthcare Connect</h1>
+    <p>Medical Assessment Report</p>
   </header>
   <main>
-    <h2>Diagnostic Summary</h2>
-    <div class="report-section">
-      <p><strong>Text-Based Analysis Result:</strong> [Text model result will appear here]</p>
-      <p><strong>Image-Based Analysis Result:</strong> [Image model result will appear here]</p>
-      <p><strong>Combined Assessment:</strong> [Final diagnosis or recommendation]</p>
+    {% if data.timestamp %}
+    <div class="timestamp">
+      Assessment completed: {{ data.timestamp }}
     </div>
-    <p>Thank you for using Apollo Healthcare Connect. Please follow up with a medical professional for confirmation and treatment options.</p>
-    <section class="features">
-      <div class="feature">
-        <h3>Fast &amp; Reliable</h3>
-        <p>Immediate response to get you the help you need.</p>
+    {% endif %}
+
+    <h1>Medical Assessment Report</h1>
+
+    <button class="print-button" onclick="window.print()">Print Report</button>
+
+    <!-- Patient Information -->
+    <div class="report-section patient-info">
+      <h3>Patient Information</h3>
+      <div class="data-row">
+        <span class="data-label">Name:</span>
+        <span class="data-value">{{ data.patient_name }}</span>
       </div>
-      <div class="feature">
-        <h3>Easy to Use</h3>
-        <p>Personal agent that helps book your treatment.</p>
+      <div class="data-row">
+        <span class="data-label">Phone:</span>
+        <span class="data-value">{{ data.patient_phone }}</span>
       </div>
-      <div class="feature">
-        <h3>24/7 Support</h3>
-        <p>We are here to help you feel better.</p>
+      <div class="data-row">
+        <span class="data-label">Appointment:</span>
+        <span class="data-value">{{ data.appointment_time if data.appointment_time != 'Not scheduled' else 'Not scheduled - Emergency care recommended' }}</span>
       </div>
-    </section>
+    </div>
+
+    <!-- Symptoms and Input -->
+    <div class="report-section symptoms-info">
+      <h3>Symptoms and Information Provided</h3>
+      <div class="data-row">
+        <span class="data-label">Initial Symptoms:</span>
+        <span class="data-value">{{ data.original_symptoms }}</span>
+      </div>
+      {% if data.triage_info and data.triage_info != 'Not provided' %}
+      <div class="data-row">
+        <span class="data-label">Additional Information:</span>
+        <span class="data-value">{{ data.triage_info }}</span>
+      </div>
+      {% endif %}
+      {% if data.uploaded_image and data.uploaded_image != 'None' %}
+      <div class="data-row">
+        <span class="data-label">Image Uploaded:</span>
+        <span class="data-value">{{ data.uploaded_image }}</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Assessment Results -->
+    <div class="report-section assessment-results">
+      <h3>AI Assessment Results</h3>
+      
+      {% if data.text_prediction %}
+      <h4>Text-Based Analysis:</h4>
+      <div class="prediction-box {% if data.text_prediction.predicted_label == 'ER' %}emergency{% endif %}">
+        <div class="data-row">
+          <span class="data-label">Recommendation:</span>
+          <span class="data-value"><strong>{{ data.text_prediction.predicted_label }}</strong></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Confidence:</span>
+          <span class="data-value">{{ "%.1f" | format(data.text_prediction.confidence * 100) }}%</span>
+        </div>
+        <div class="confidence-bar">
+          <div class="confidence-fill {% if data.text_prediction.confidence < 0.6 %}low{% elif data.text_prediction.confidence < 0.8 %}medium{% else %}high{% endif %}" 
+               style="width: {{ data.text_prediction.confidence * 100 }}%"></div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if data.updated_text_prediction %}
+      <h4>Updated Text Analysis (after additional information):</h4>
+      <div class="prediction-box {% if data.updated_text_prediction.predicted_label == 'ER' %}emergency{% endif %}">
+        <div class="data-row">
+          <span class="data-label">Recommendation:</span>
+          <span class="data-value"><strong>{{ data.updated_text_prediction.predicted_label }}</strong></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Confidence:</span>
+          <span class="data-value">{{ "%.1f" | format(data.updated_text_prediction.confidence * 100) }}%</span>
+        </div>
+        <div class="confidence-bar">
+          <div class="confidence-fill {% if data.updated_text_prediction.confidence < 0.6 %}low{% elif data.updated_text_prediction.confidence < 0.8 %}medium{% else %}high{% endif %}" 
+               style="width: {{ data.updated_text_prediction.confidence * 100 }}%"></div>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if data.image_prediction and data.image_prediction.predicted_label %}
+      <h4>Image-Based Analysis:</h4>
+      <div class="prediction-box">
+        <div class="data-row">
+          <span class="data-label">Condition Detected:</span>
+          <span class="data-value"><strong>{{ data.image_prediction.predicted_label }}</strong></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Confidence:</span>
+          <span class="data-value">{{ "%.1f" | format(data.image_prediction.confidence * 100) }}%</span>
+        </div>
+        <div class="confidence-bar">
+          <div class="confidence-fill {% if data.image_prediction.confidence < 0.6 %}low{% elif data.image_prediction.confidence < 0.8 %}medium{% else %}high{% endif %}" 
+               style="width: {{ data.image_prediction.confidence * 100 }}%"></div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Final Recommendation -->
+    <div class="report-section">
+      <h3>Final Recommendation</h3>
+      {% if data.emergency_reason and data.emergency_reason != 'None' %}
+      <div class="prediction-box emergency">
+        <div class="data-row">
+          <span class="data-label">Care Level:</span>
+          <span class="data-value"><strong>EMERGENCY CARE REQUIRED</strong></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Reason:</span>
+          <span class="data-value">{{ data.emergency_reason }}</span>
+        </div>
+      </div>
+      {% else %}
+      <div class="prediction-box">
+        <div class="data-row">
+          <span class="data-label">Care Level:</span>
+          <span class="data-value"><strong>URGENT CARE APPROPRIATE</strong></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Appointment Status:</span>
+          <span class="data-value">{{ 'Scheduled' if data.appointment_time != 'Not scheduled' else 'Pending' }}</span>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Assessment Flags -->
+    <div class="report-section">
+      <h3>Assessment Flags</h3>
+      <div class="data-row">
+        <span class="data-label">Low Confidence Flag:</span>
+        <span class="data-value">{{ 'Yes - Additional information was requested' if data.low_confidence else 'No' }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Physical Condition Flag:</span>
+        <span class="data-value">{{ 'Yes - Image analysis was performed' if data.physical_condition else 'No' }}</span>
+      </div>
+      <div class="data-row">
+        <span class="data-label">Emergency Flag:</span>
+        <span class="data-value">{{ 'Yes' if data.emergency_reason and data.emergency_reason != 'None' else 'No' }}</span>
+      </div>
+    </div>
+
+    <!-- Disclaimer -->
+    <div class="report-section" style="background-color: #fef2f2; border-left: 4px solid #dc2626;">
+      <h3>Important Disclaimer</h3>
+      <p><strong>This report is generated by an AI assessment tool and is for informational purposes only.</strong></p>
+      <p>This assessment does not replace professional medical advice, diagnosis, or treatment. Always seek the advice of qualified healthcare providers with any questions you may have regarding a medical condition.</p>
+      <p>If you are experiencing a medical emergency, call 911 immediately.</p>
+    </div>
+
+    <div style="text-align: center; margin: 2rem 0;">
+      <p><strong>For questions about this report, contact Apollo Urgent Care at (319) 555-CARE (2273)</strong></p>
+      <a href="{{ url_for('index') }}" style="color: #2b6cb0; text-decoration: none; font-weight: bold;">Start New Assessment</a>
+    </div>
   </main>
+
   <footer>
-    &copy; 2025 Apollo Healthcare. All rights reserved.
+    <p>&copy; 2025 Apollo Healthcare Connect. All rights reserved.</p>
+    <a href="{{ url_for('index') }}">Home</a> |
+    <a href="{{ url_for('about') }}">About</a> |
+    <a href="{{ url_for('contact') }}">Contact</a>
   </footer>
 </body>
 </html>

@@ -41,3 +41,6 @@ Unused models/
 *.pyc
 __pycache__/
 *.DS_Store
+1text_model/
+app_models/
+uploads/
