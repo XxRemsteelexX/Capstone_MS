@@ -29,17 +29,64 @@
       line-height: 1.3;
       letter-spacing: 0.5px;
     }
-    main {
-      max-width: 800px;
+    .container {
+      display: flex;
+      max-width: 1200px;
       margin: 3rem auto;
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+    main {
+      flex: 2;
       padding: 2rem;
       background-color: white;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
+    .disclaimer-sidebar {
+      flex: 1;
+      background-color: #fee2e2;
+      border: 2px solid #dc2626;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+    }
+    .disclaimer-sidebar h3 {
+      color: #dc2626;
+      margin-top: 0;
+      font-size: 1.2rem;
+      border-bottom: 2px solid #dc2626;
+      padding-bottom: 0.5rem;
+    }
+    .disclaimer-sidebar h4 {
+      color: #dc2626;
+      margin: 1rem 0 0.5rem 0;
+      font-size: 1rem;
+    }
+    .disclaimer-sidebar ul {
+      margin: 0.5rem 0;
+      padding-left: 1.2rem;
+    }
+    .disclaimer-sidebar li {
+      margin: 0.3rem 0;
+      font-size: 0.9rem;
+      color: #7f1d1d;
+    }
+    .disclaimer-sidebar .note {
+      background-color: #fef2f2;
+      border: 1px solid #fca5a5;
+      border-radius: 6px;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #7f1d1d;
+    }
     h1 {
       margin-top: 0;
-      font-size: 3.2rem;
+      font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: 1px;
     }
@@ -81,8 +128,8 @@
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       padding: 2rem;
-      max-width: 320px;
-      flex: 1 1 250px;
+      max-width: 280px;
+      flex: 1 1 200px;
       text-align: center;
     }
     .feature h3 {
@@ -111,6 +158,13 @@
       margin: 1rem 0;
     }
     @media (max-width: 800px) {
+      .container {
+        flex-direction: column;
+      }
+      .disclaimer-sidebar {
+        order: -1;
+        position: static;
+      }
       .features {
         flex-direction: column;
         gap: 1rem;
@@ -123,35 +177,86 @@
     <h1>Apollo Healthcare Connect</h1>
     <p class="tagline">Your well-being is our priority</p>
   </header>
-  <main>
-    {% if error %}
-    <div class="error">
-      {{ error }}
-    </div>
-    {% endif %}
-    
-    <form method="post">
-      <p style="margin-bottom: 0.5rem; color: #2b6cb0; font-weight: 600;">To make an appointment for Urgent Care, please enter your information below.</p>
-      <label for="symptoms"><strong>What are we seeing you for today?</strong></label>
-      <textarea name="symptoms" id="symptoms" placeholder="e.g., cough, fever, headache, chest pain, difficulty breathing..." required></textarea>
-      <button type="submit">Submit Symptoms</button>
-    </form>
-    
-    <section class="features">
-      <div class="feature">
-        <h3>Fast &amp; Reliable</h3>
-        <p>Immediate response to get you the help you need.</p>
+  
+  <div class="container">
+    <main>
+      {% if error %}
+      <div class="error">
+        {{ error }}
       </div>
-      <div class="feature">
-        <h3>Easy to Use</h3>
-        <p>Personal agent that helps book your treatment.</p>
+      {% endif %}
+      
+      <form method="post">
+        <p style="margin-bottom: 0.5rem; color: #2b6cb0; font-weight: 600;">To make an appointment for Urgent Care, please enter your information below.</p>
+        <label for="symptoms"><strong>What are we seeing you for today?</strong></label>
+        <textarea name="symptoms" id="symptoms" placeholder="e.g., cough, fever, headache, chest pain, difficulty breathing..." required></textarea>
+        <button type="submit">Submit Symptoms</button>
+      </form>
+      
+      <section class="features">
+        <div class="feature">
+          <h3>Fast &amp; Reliable</h3>
+          <p>Immediate response to get you the help you need.</p>
+        </div>
+        <div class="feature">
+          <h3>Easy to Use</h3>
+          <p>Personal agent that helps book your treatment.</p>
+        </div>
+        <div class="feature">
+          <h3>24/7 Support</h3>
+          <p>We are here to help you feel better.</p>
+        </div>
+      </section>
+    </main>
+
+    <aside class="disclaimer-sidebar">
+      <h3>🎓 Capstone Project Demo</h3>
+      <p><strong>Please note:</strong> This AI system is trained on specific symptoms only. For best results, use symptoms from the lists below:</p>
+      
+      <h4>Emergency Symptoms (→ ER):</h4>
+      <ul>
+        <li>Chest pain</li>
+        <li>Heart attack symptoms</li>
+        <li>Stroke symptoms</li>
+        <li>Difficulty breathing</li>
+        <li>Severe bleeding</li>
+        <li>Unconsciousness</li>
+        <li>Severe head injury</li>
+        <li>Severe burns</li>
+        <li>Choking</li>
+        <li>Severe allergic reaction</li>
+      </ul>
+
+      <h4>Urgent Care Symptoms:</h4>
+      <ul>
+        <li>Fever</li>
+        <li>Cough</li>
+        <li>Headache</li>
+        <li>Cold symptoms</li>
+        <li>Flu symptoms</li>
+        <li>Sore throat</li>
+        <li>Nausea</li>
+        <li>Minor injuries</li>
+      </ul>
+
+      <h4>Physical Conditions (→ Image Upload):</h4>
+      <ul>
+        <li>Burns (1st, 2nd, 3rd degree)</li>
+        <li>Wounds & cuts</li>
+        <li>Bruises</li>
+        <li>Rashes</li>
+        <li>Swelling</li>
+        <li>Skin injuries</li>
+        <li>Abrasions</li>
+        <li>Lacerations</li>
+      </ul>
+
+      <div class="note">
+        <strong>Note:</strong> Symptoms outside these categories may not work correctly. This is a demonstration of AI-powered medical triage for educational purposes only.
       </div>
-      <div class="feature">
-        <h3>24/7 Support</h3>
-        <p>We are here to help you feel better.</p>
-      </div>
-    </section>
-  </main>
+    </aside>
+  </div>
+
   <footer>
     <a href="{{ url_for('index') }}">Home</a> |
     <a href="{{ url_for('triage') }}">Triage</a> |
