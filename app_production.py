@@ -323,9 +323,9 @@ def schedule():
     now = datetime.now()
     
     # Check business hours (8 AM - 8 PM)
-    if now.hour < 8 or now.hour >= 20:
-        session['reason'] = "Outside business hours - emergency care recommended"
-        return redirect(url_for('er'))
+    #if now.hour < 8 or now.hour >= 20:
+    #    session['reason'] = "Outside business hours - emergency care recommended"
+    #    return redirect(url_for('er'))
     
     if request.method == "POST":
         session['patient_name'] = request.form.get('name', '').strip()
