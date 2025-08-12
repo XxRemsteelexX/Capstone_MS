@@ -7,25 +7,25 @@
 
 ---
 
-## 🚀 **Live Production System**
+##  **Live Production System**
 **https://apollohealthcareconnect.com**
 
 *Serving real users worldwide with intelligent healthcare routing and provider preparation*
 
 ---
 
-## 📋 **Project Overview**
+##  **Project Overview**
 
 Apollo Healthcare Connect addresses critical inefficiencies in healthcare appointment booking by providing **intelligent patient routing** between urgent care and emergency room facilities while preparing healthcare providers with comprehensive patient information prior to appointments.
 
-### **🎯 Research Question**
+### ** Research Question**
 *"Can a comprehensive multi-modal artificial intelligence system be developed and successfully deployed as a live production application to provide accurate healthcare routing while maintaining clinical safety standards?"*
 
-### **✅ Answer: YES** - Proven with live deployment and exceptional performance metrics.
+### ** Answer: YES** - Proven with live deployment and exceptional performance metrics.
 
 ---
 
-## 🏆 **Key Achievements**
+##  **Key Achievements**
 
 | Metric | Result | Significance |
 |--------|---------|-------------|
@@ -34,11 +34,11 @@ Apollo Healthcare Connect addresses critical inefficiencies in healthcare appoin
 | **Text Classification Accuracy** | **94.0%** | DistilBERT symptom analysis |
 | **Dataset Scale** | **8,085 medical images** | Across 8 medical conditions |
 | **Class Imbalance Handled** | **29.7:1 ratio** | Advanced techniques (focal loss, label smoothing) |
-| **Production Deployment** | **✅ Live System** | Real-world validation |
+| **Production Deployment** | ** Live System** | Real-world validation |
 
 ---
 
-## 🔬 **Technical Innovation**
+##  **Technical Innovation**
 
 ### **Multi-Modal AI Architecture**
 - **Text Analysis:** DistilBERT-based symptom classifier (Urgent Care vs ER)
@@ -59,7 +59,7 @@ Apollo Healthcare Connect addresses critical inefficiencies in healthcare appoin
 
 ---
 
-## 📊 **Dataset & Methodology**
+##  **Dataset & Methodology**
 
 ### **Medical Image Dataset**
 - **Sources:** 4 Kaggle medical datasets (burns, wounds)
@@ -80,7 +80,7 @@ Apollo Healthcare Connect addresses critical inefficiencies in healthcare appoin
 
 ---
 
-## 🏗️ **System Architecture**
+##  **System Architecture**
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
@@ -98,7 +98,7 @@ Apollo Healthcare Connect addresses critical inefficiencies in healthcare appoin
 
 ---
 
-## 📂 **Repository Structure**
+##  **Repository Structure**
 
 ```
 Apollo-Healthcare-Connect/
@@ -116,7 +116,7 @@ Apollo-Healthcare-Connect/
 
 ---
 
-## 🚀 **Quick Start**
+##  **Quick Start**
 
 ### **Installation**
 ```bash
@@ -138,7 +138,7 @@ gunicorn --bind 0.0.0.0:5000 app_production:app
 
 ---
 
-## 📋 **Requirements**
+##  **Requirements**
 
 ### **Core Dependencies**
 - **Flask** - Web framework
@@ -156,7 +156,7 @@ gunicorn --bind 0.0.0.0:5000 app_production:app
 
 ---
 
-## ⚠️ **Important Disclaimers**
+## ⚠ **Important Disclaimers**
 
 - **Educational Purpose:** This system was developed as a data science capstone project
 - **Not Medical Advice:** Results are for demonstration and research purposes only
@@ -165,7 +165,7 @@ gunicorn --bind 0.0.0.0:5000 app_production:app
 
 ---
 
-## 🎓 **Academic Context**
+##  **Academic Context**
 
 ### **Capstone Significance**
 This project demonstrates advanced data science methodology including:
@@ -183,7 +183,7 @@ This project demonstrates advanced data science methodology including:
 
 ---
 
-## 📈 **Performance Metrics**
+##  **Performance Metrics**
 
 ### **Model Performance**
 - **Burn Classification:** 98% accuracy (critical for emergency routing)
@@ -198,7 +198,7 @@ This project demonstrates advanced data science methodology including:
 
 ---
 
-## 🔬 **Research Applications**
+##  **Research Applications**
 
 This system provides a foundation for:
 - Healthcare workflow optimization research
@@ -206,15 +206,10 @@ This system provides a foundation for:
 - Medical image classification advancement
 - Production ML deployment methodologies
 
----
-
-## 📄 **License**
-
-MIT License - Free for educational and research use with attribution.
 
 ---
 
-## 🙏 **Acknowledgements**
+##  **Acknowledgements**
 
 - **Western Governors University** - Data Science Program support
 - **Hugging Face** - DistilBERT transformer models
@@ -224,7 +219,7 @@ MIT License - Free for educational and research use with attribution.
 
 ---
 
-## 📞 **Contact**
+##  **Contact**
 
 **Glenn Dalbey**  
 *Data Science Graduate, Western Governors University*  
