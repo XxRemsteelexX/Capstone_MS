@@ -319,36 +319,44 @@ def er():
     return render_template("er.html", reason=reason)
 
 @app.route("/schedule", methods=["GET", "POST"])
+@app.route("/schedule", methods=["GET", "POST"])
 def schedule():
     now = datetime.now()
-    
-    # Check business hours (8 AM - 8 PM)
-    #if now.hour < 8 or now.hour >= 20:
-    #    session['reason'] = "Outside business hours - emergency care recommended"
-    #    return redirect(url_for('er'))
     
     if request.method == "POST":
         session['patient_name'] = request.form.get('name', '').strip()
         session['phone'] = request.form.get('phone', '').strip()
         session['appointment_time'] = request.form.get('appointment_time', '')
-        
         return redirect(url_for('confirmation'))
     
-    # Generate fake appointment times (every 30 minutes from now until 8 PM)
+    # Generate appointment times (every 30 minutes)
     available_times = []
-    current_time = now.replace(minute=0 if now.minute < 30 else 30, second=0, microsecond=0)
-    if now.minute >= 30:
-        current_time += timedelta(hours=1)
     
-    end_time = now.replace(hour=20, minute=0, second=0, microsecond=0)
+    current_time = now.replace(second=0, microsecond=0)
+    if current_time.minute < 30:
+        current_time = current_time.replace(minute=30)
+    else:
+        current_time = current_time.replace(minute=0) + timedelta(hours=1)
     
-    while current_time <= end_time:
+    # Track if we moved to next day
+    moved_to_tomorrow = False
+    
+    # If it's after 8 PM, start tomorrow at 8 AM
+    if current_time.hour >= 20:
+        current_time = (current_time + timedelta(days=1)).replace(hour=8, minute=0)
+        moved_to_tomorrow = True
+    
+    # Set end time appropriately
+    if moved_to_tomorrow:
+        end_time = current_time.replace(hour=20, minute=0)  # 8 PM tomorrow
+    else:
+        end_time = current_time.replace(hour=20, minute=0)  # 8 PM today
+    
+    while current_time <= end_time and len(available_times) < 24:  # Max 24 slots
         available_times.append(current_time.strftime('%Y-%m-%dT%H:%M'))
         current_time += timedelta(minutes=30)
-
-    # debug("schedule.html", available_times=available_times)
-    print(f"DEBUG: Passing {len(available_times)} times to template: {available_times}")
     
+    print(f"DEBUG: Generated {len(available_times)} appointment times")
     return render_template("schedule.html", available_times=available_times)
 
 @app.route("/confirmation")
