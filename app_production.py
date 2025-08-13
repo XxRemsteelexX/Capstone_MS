@@ -35,7 +35,7 @@ image_transforms = None
 # Medical condition mappings
 EMERGENCY_KEYWORDS = [
     "chest pain", "heart attack", "stroke", "can't breathe", "difficulty breathing",
-    "severe bleeding", "unconscious", "overdose", "severe head injury", "seizure",
+    "severe bleeding", "unconscious", "overdose", "severe head injury", "seizure","broken","fever 104",
     "severe burns", "choking", "severe allergic reaction", "anaphylaxis",
     "fever 105", "fever 106", "fever 107", "fever 108", "high fever", "fever over 104", "104.1", 
     "104.1","104.2","104.3","104.4","104.5","104.6","104.7","104.8","104.9","105","105.1","105.2",
@@ -45,7 +45,7 @@ EMERGENCY_KEYWORDS = [
 ]
 
 PHYSICAL_KEYWORDS = [
-    "burn", "wound", "cut", "bruise", "rash", "lesion", "ulcer", "abrasion"
+    "burn", "wound", "cut", "bruise", "rash", "lesion", "ulcer", "abrasion", "broken"
 ]
 
 CONFIDENCE_THRESHOLD = 0.6
